@@ -12,7 +12,7 @@ def task1() -> PrettyTable:
     :return: table with answers
     """
 
-    N = 500
+    MAXN = 500
     while True:
         try:
             x = user_in("Enter X:\n", float)
@@ -27,7 +27,7 @@ def task1() -> PrettyTable:
 
     sum_f = 0
     n = 0
-    while abs(sum_f - mathf) > eps and n < N:
+    while abs(sum_f - mathf) > eps and n <= MAXN:
         sum_f += 2 * (1 / ((2*n + 1) * x ** (2 * n + 1)))
         n += 1
 

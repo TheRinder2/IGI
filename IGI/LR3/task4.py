@@ -2,7 +2,6 @@ def task4() -> str:
     """
     a) Count the words in string
     b) Find the longest word and its number
-
     :return: String without even words
     """
     mystring = input("Enter string to check words\n")
