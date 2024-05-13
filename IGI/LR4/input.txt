@@ -1,0 +1,14 @@
+Match a single character present in the list below [A-z]
++ matches the previous token between one and unlimited times, as many times as possible, giving back as needed (greedy)
+A-z matches a single character in the range between A (index 65) and z (index 122) (case sensitive)
+Match a single character present in the list below [,], matches the character , with index 4410 (2C16 or 548) literally (case sensitive)
+Global pattern flags g modifier: global. All matches (don't return after first match)
+
+:-)))]()
+
+:)))
+AB2121
+AB 2121
+ABAB2121
+AC212222
+;-----[[[ :]]]

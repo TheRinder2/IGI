@@ -1,0 +1,12 @@
+Number of sentences:All: 1Narrative(.): 1Interrogative(?): 0Incentive(!): 0
+Average sentence len: 6
+Average word len: 4.734177215189874
+Smiles count: 4
+Words starting with a lowercase letter: ['a', 'single', 'character', 'present', 'in', 'the', 'list', 'below', 'z', 'matches', 'the', 'previous', 'token', 'between', 'one', 'and', 'unlimited', 'times', 'as', 'many', 'times', 'as', 'possible', 'giving', 'back', 'as', 'needed', 'greedy', 'z', 'matches', 'a', 'single', 'character', 'in', 'the', 'range', 'between', 'index', 'and', 'z', 'index', 'case', 'sensitive', 'a', 'single', 'character', 'present', 'in', 'the', 'list', 'below', 'matches', 'the', 'character', 'with', 'index', 'or', 'literally', 'case', 'sensitive', 'pattern', 'flags', 'g', 'modifier', 'global', 'matches', 'don', 't', 'return', 'after', 'first', 'match']
+Punctuation: [',', ',', ',', ',', ',', '.']
+Auto numbers: ['AB2121', 'AB2121', 'AC2122']
+Words with a commas:
+Count: 2
+times, possible,
+Longest word:
+character
