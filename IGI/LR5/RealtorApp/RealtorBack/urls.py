@@ -24,5 +24,4 @@ urlpatterns = [
     path('requestRent', views.offersRent, name='requestRent'),
     path('time', views.userTime, name='time'),
     path('employee', views.employee, name='employee'),
-    # path('order', views.order, name='order'),
 ]

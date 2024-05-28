@@ -130,6 +130,12 @@ def offersRent(request):
             selected_records = Rent.objects.filter(id__in=selected_ids)
             cost = selected_records.aggregate(total_cost=Sum('cost'))['total_cost']
             logger.debug('Rent accepted')
+            # try:
+            #     prom = formrent.cleaned_data['discount']
+            #     dis = Discount.objects.filter(ntype=prom)[0]
+            #     cost *= dis.uncost
+            # except:
+            #     logger.debug('Промокод не найден')
 
             for i in selected_records:
                 RequestRent.objects.create(rent=i, user=request.user, ready=False)
@@ -147,12 +153,13 @@ def offersImm(request):
     if request.method == 'POST':
         formimm = OfferImmForm(request.POST)
         if formimm.is_valid():
+            prom = formimm.cleaned_data['discount']
             selected_ids = map(int, formimm.cleaned_data['options'])
             selected_records = Immovables.objects.filter(id__in=selected_ids)
             cost = selected_records.aggregate(total_cost=Sum('cost'))['total_cost']
 
             for i in selected_records:
-                RequestImm.objects.create(imm=i, user=request.user, ready=False)
+                RequestImm.objects.create(imm=i, user=request.user, discount=prom, ready=False)
     else:
         formimm = OfferImmForm()
     content = {

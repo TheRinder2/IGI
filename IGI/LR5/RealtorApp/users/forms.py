@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 
 from RealtorBack.models import Comment
 from .models import User as MyUser
@@ -9,7 +10,10 @@ from .models import User as MyUser
 class UserRegisterForm(UserCreationForm):
     age = forms.IntegerField(min_value=18, max_value=99)
     fullName = forms.CharField()
-    phone = forms.CharField()
+    phone_number_regex = RegexValidator(
+        regex=r'^(?:\+375)?\((?:29|33|25|44)\)\d{7}$',
+        message="Invalid phone number, format: +375(29)XXXXXXX")
+    phone = forms.CharField(validators=[phone_number_regex], max_length=20)
     passport = forms.CharField()
 
     class Meta:

@@ -37,8 +37,10 @@ class Vacancion(models.Model):
 
 
 class Discount(models.Model):
+    ntype = models.IntegerField(default=2)
     title = models.TextField('Заголовок')
     text = models.TextField('Текст')
+    uncost = models.IntegerField(default=1)
 
     def __str__(self):
         return self.title
@@ -46,6 +48,10 @@ class Discount(models.Model):
 
 class Rent(models.Model):
     responsuser = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    # worker = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    # ntype = models.IntegerField(default=0)
+
+
     text = models.TextField('Услуга')
     cost = models.IntegerField('Цена')
     duration = models.DateTimeField('Длительность аренды')
@@ -53,8 +59,10 @@ class Rent(models.Model):
 
 class Immovables(models.Model):
     responsuser = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    # worker = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    # ntype = models.IntegerField()
+
     text = models.TextField('Описание')
-    tp = models.TextField('')
     cost = models.IntegerField('Цена')
 
     def __str__(self):
@@ -64,12 +72,14 @@ class Immovables(models.Model):
 class RequestRent(models.Model):
     rent = models.ForeignKey(Rent, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    discount = models.ForeignKey(Discount, on_delete=models.CASCADE, null=True)
     ready = models.BooleanField("Заказ выполнен", default=False)
 
 
 class RequestImm(models.Model):
     imm = models.ForeignKey(Immovables, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    discount = models.ForeignKey(Discount,on_delete=models.CASCADE, null=True)
     ready = models.BooleanField("Заказ выполнен", default=False)
 
 
