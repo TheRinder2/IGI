@@ -16,6 +16,9 @@
             {% for el in reqrent %}
                 <div style="background-color:lightgrey; margin:5px">
                     <h3>{{ el.rent.text }}</h3>
+                    {% if el.discount %}
+                        <h3>Промокод: {{ el.discount.title }}</h3>
+                    {% endif %}
                     <h3>{{ el.rent.cost }}</h3>
                 </div>
             {% endfor %}
@@ -25,12 +28,43 @@
             {% for el in reqimm %}
                 <div style="background-color:lightgrey; margin:5px">
                     <h3>{{ el.imm.text }}</h3>
+                    {% if el.discount %}
+                        <h3>Промокод: {{ el.discount.title }}</h3>
+                    {% endif %}
                     <h3>{{ el.imm.cost }}</h3>
                 </div>
             {% endfor %}
         {%endif%}
     {% else %}
     {% endif %}
+
+        {% if workerrent %}
+            <h2>Сделки по аренде недвижимости:</h2>
+            {% for el in workerrent %}
+                <div style="background-color:lightgrey; margin:5px">
+                    <h3>Имя пользователя: {{ el.user.username }}</h3>
+                    <h3>Сделка:{{ el.rent.text }}</h3>
+                    {% if el.discount %}
+                        <h3>Промокод: {{ el.discount.title }}</h3>
+                    {% endif %}
+                    <h3>{{ el.rent.cost }}</h3>
+                </div>
+            {% endfor %}
+        {%endif%}
+
+        {% if workerimm %}
+            <h2>Сделки по недвижимости:</h2>
+            {% for el in workerimm %}
+                <div style="background-color:lightgrey; margin:5px">
+                    <h3>Имя пользователя: {{ el.user.username }}</h3>
+                    <h3>Сделка:{{ el.imm.text }}</h3>
+                    {% if el.discount %}
+                        <h3>Промокод: {{ el.discount.title }}</h3>
+                    {% endif %}
+                    <h3>{{ el.imm.cost }}</h3>
+                </div>
+            {% endfor %}
+        {%endif%}
 
 
 {% endblock %}

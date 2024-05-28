@@ -20,16 +20,20 @@ class CommentForm(forms.Form):
 
 
 class OfferRentForm(forms.Form):
-    options = forms.MultipleChoiceField(
-        choices=[(i, j.text + ' ' + str(j.cost) + '$') for i, j in enumerate(Rent.objects.all(), start=1)],
-        widget=forms.CheckboxSelectMultiple,
+    options = forms.ChoiceField(
+        choices=[(j.id, j.text + ' Тип недвижимости:' + str(j.ntype) + ' ' + str(j.cost) + '$') for j in Rent.objects.all()],
+        widget=forms.RadioSelect,
         required=True
     )
+    discount = forms.CharField(max_length=15, required=False)
 
 
 class OfferImmForm(forms.Form):
-    options = forms.MultipleChoiceField(
-        choices=[(i, j.text + ' ' + str(j.cost) + '$') for i, j in enumerate(Immovables.objects.all(), start=1)],
-        widget=forms.CheckboxSelectMultiple,
+    options = forms.ChoiceField(
+        choices=[(j.id, j.text + ' Тип недвижимости:' + str(j.ntype) + ' ' + str(j.cost) + '$') for j in Immovables.objects.all()],
+        widget=forms.RadioSelect,
         required=True
     )
+    discount = forms.CharField(max_length=15, required=False)
+
+

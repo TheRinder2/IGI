@@ -4,7 +4,8 @@
 
 {% block сontent %}
     {% for el in new%}
-        <div>
+        <div style="background-color:lightgrey; padding:10px; margin-bottom:5px">
+             <img src="{{ el.img.url }}" width="200" height="200">
             <h3>{{ el.title }}</h3>
             <p>{{ el.text }}</p>
         </div>

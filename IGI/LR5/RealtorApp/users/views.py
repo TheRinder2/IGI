@@ -36,11 +36,26 @@ def profile(request):
     user = User.objects.filter(user=request.user)[0]
     reqrent = RequestRent.objects.filter(user=request.user)
     reqimm = RequestImm.objects.filter(user=request.user)
+
+    workerrent = []
+    for i in RequestRent.objects.all():
+        if i.rent.worker == request.user:
+            workerrent.append(i)
+
+    workerimm = []
+    for i in RequestImm.objects.all():
+        if i.imm.worker == request.user:
+            workerimm.append(i)
+
     context = {
         'usernow': user,
         'reqrent': reqrent,
-        'reqimm': reqimm
+        'reqimm': reqimm,
+        'workerrent': workerrent,
+        'workerimm': workerimm
     }
+    print(workerrent)
+    print(workerimm)
     return render(request, 'user/profile.html', context=context)
 
 
@@ -51,10 +66,7 @@ def profileedit(request):
         if form.is_valid():
             form.save(user=request.user)
             logger.debug('User edited')
-            context = {
-                'form': form
-            }
-            return render(request, 'user/profile.html', context=context)
+            return redirect('profile')
         else:
             logger.debug('Edit form not valid')
 

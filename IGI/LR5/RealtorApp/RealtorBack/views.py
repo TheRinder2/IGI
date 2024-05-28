@@ -1,6 +1,8 @@
+from dateutil.relativedelta import relativedelta
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
+from users.models import User
 from .forms import CommentForm, OfferRentForm, OfferImmForm
 from .models import New, FAQ, Vacancion, Rent, Discount, Contact, Comment, Time, Report, Immovables, RequestRent, RequestImm
 from datetime import datetime
@@ -12,7 +14,42 @@ from loguru import logger
 
 
 def about(request):
-    return render(request, 'about.html')
+
+    mage = 0
+    for i in User.objects.all():
+        mage += relativedelta(datetime.today().date(), i.birth_date).years
+    mage /= len(User.objects.all())
+
+    sumRent = 0
+    try:
+        for i in RequestRent.objects.all():
+            sumRent += i.rent.cost
+
+        sumRentReq = sumRent
+        sumRent /= len(RequestRent.objects.all())
+    except ZeroDivisionError:
+        logger.warning('ВИУ ВИУ ДЕЛЕНИЕ НА НОЛЬ')
+
+    sumImm = 0
+    try:
+        for i in RequestImm.objects.all():
+            sumImm += i.imm.cost
+
+        sumImmReq = sumImm
+        sumImm /= len(RequestImm.objects.all())
+    except ZeroDivisionError:
+        logger.warning('ВИУ ВИУ ДЕЛЕНИЕ НА НОЛЬ')
+
+
+    context = {
+        'mage': mage,
+        'sumRent': sumRent,
+        'sumRentReq': sumRentReq,
+        'sumImm': sumImm,
+        'sumImmReq': sumImmReq,
+    }
+
+    return render(request, 'about.html', context=context)
 
 
 def get_weather_data(lat, lon, api_key):
@@ -58,6 +95,7 @@ def index(request):
         logger.warning('Api warning')
 
     context = {
+        'lastnews': New.objects.all()[len(New.objects.all()) - 1],
         'data': data,
         'data1': data1,
         'elements': elements,
@@ -73,7 +111,7 @@ def registration(request):
 
 
 def news(request):
-    new = New.objects.all()
+    new = reversed(New.objects.all())
     return render(request, 'news.html', {'new': new})
 
 
@@ -126,19 +164,19 @@ def offersRent(request):
     if request.method == 'POST':
         formrent = OfferRentForm(request.POST)
         if formrent.is_valid():
-            selected_ids = map(int, formrent.cleaned_data['options'])
-            selected_records = Rent.objects.filter(id__in=selected_ids)
-            cost = selected_records.aggregate(total_cost=Sum('cost'))['total_cost']
+            selected_idx = formrent.cleaned_data['options']
+            selected_record = Rent.objects.filter(id__in=selected_idx)[0]
+            cost = selected_record.cost
             logger.debug('Rent accepted')
-            # try:
-            #     prom = formrent.cleaned_data['discount']
-            #     dis = Discount.objects.filter(ntype=prom)[0]
-            #     cost *= dis.uncost
-            # except:
-            #     logger.debug('Промокод не найден')
-
-            for i in selected_records:
-                RequestRent.objects.create(rent=i, user=request.user, ready=False)
+            try:
+                prom = formrent.cleaned_data['discount']
+                dis = Discount.objects.filter(key=prom, ntype=selected_record.ntype)[0]
+                cost *= dis.uncost
+                logger.debug('Промокод найден')
+            except:
+                dis = None
+                logger.debug('Промокод не найден')
+            RequestRent.objects.create(rent=selected_record, user=request.user, discount=dis, ready=False)
     else:
         formrent = OfferRentForm()
     content = {
@@ -153,13 +191,20 @@ def offersImm(request):
     if request.method == 'POST':
         formimm = OfferImmForm(request.POST)
         if formimm.is_valid():
-            prom = formimm.cleaned_data['discount']
-            selected_ids = map(int, formimm.cleaned_data['options'])
-            selected_records = Immovables.objects.filter(id__in=selected_ids)
-            cost = selected_records.aggregate(total_cost=Sum('cost'))['total_cost']
+            selected_idx = formimm.cleaned_data['options']
+            selected_record = Immovables.objects.filter(id__in=selected_idx)[0]
+            cost = selected_record.cost
+            logger.debug('Immovables accepted')
+            try:
+                prom = formimm.cleaned_data['discount']
+                dis = Discount.objects.filter(key=prom, ntype=selected_record.ntype)[0]
+                cost *= dis.uncost
+                logger.debug('Промокод найден')
+            except:
+                dis = None
+                logger.debug('Промокод не найден')
+            RequestImm.objects.create(imm=selected_record, user=request.user, discount=dis, ready=False)
 
-            for i in selected_records:
-                RequestImm.objects.create(imm=i, user=request.user, discount=prom, ready=False)
     else:
         formimm = OfferImmForm()
     content = {
