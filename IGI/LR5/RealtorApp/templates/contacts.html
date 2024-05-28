@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{%block title%}Контакты{% endblock %}
+
+{% block сontent %}
+    {% for el in Contact%}
+      <div style="background-color:lightgrey; margin:5px">
+            <h3>{{ el.full_name }}</h3>
+            <p>Номер телефона: {{ el.phone }}</p>
+            <p>Описание: {{el.description}}</p>
+            {% if el.img %}
+                <img src="{{ el.img.url }}" alt="{{ el.full_name }}" width="150" height="150">
+            {% endif %}
+
+        </div>
+    {% endfor%}
+{% endblock %}

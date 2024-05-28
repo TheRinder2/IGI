@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{%block title%}Отзывы{% endblock %}
+
+{% block сontent %}
+
+    <h2>UserName: {{ usernow.user }}</h2>
+    <h3>Возраст: {{ usernow.age }}</h3>
+    <h3>ФИО: {{ usernow.fullName }}</h3>
+    <h3>Телефон: {{ usernow.phone }}</h3>
+
+    <a href="{% url 'profileedit'%}"><li>Изменить данные</li></a>
+
+    {% if usernow.isworker == False%}
+        {% if reqrent %}
+            <h2>Ваша аренда:</h2>
+            {% for el in reqrent %}
+                <div style="background-color:lightgrey; margin:5px">
+                    <h3>{{ el.rent.text }}</h3>
+                    <h3>{{ el.rent.cost }}</h3>
+                </div>
+            {% endfor %}
+        {%endif%}
+        {% if reqimm %}
+            <h2>Ваша покупки недвижимости:</h2>
+            {% for el in reqimm %}
+                <div style="background-color:lightgrey; margin:5px">
+                    <h3>{{ el.imm.text }}</h3>
+                    <h3>{{ el.imm.cost }}</h3>
+                </div>
+            {% endfor %}
+        {%endif%}
+    {% else %}
+    {% endif %}
+
+
+{% endblock %}

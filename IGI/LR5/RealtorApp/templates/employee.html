@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Работник</title>
+</head>
+<body>
+    <p>Страница работника</p>
+    <p>Задачи</p>
+    <ul>
+        {% for el in requests %}
+            {% for el1 in jobs %}
+                {%if el.JobId == el1.idJob %}
+                    <p>{{el1.text}}</p>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+    <h1>Статистика</h1>
+    {% if most_frequent_id %}
+        {% for el in jobs%}
+            {% if el.idJob == most_frequent_id%}
+                <p>Самая популярная услуга: {{ el.text }}</p>
+            {% endif %}
+        {% endfor %}
+
+        <p>Нужно сдалать: {{ most_frequent_count }} рвз</p>
+    {% else %}
+        <p>Нет улсуг</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label>Поле для отчёта</label>
+        <p><textarea name="comment" rows="4" cols="50"></textarea></p>
+        <button type="submit">Отправить отчёт</button>
+    </form>
+</body>
+</html>

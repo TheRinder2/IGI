@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{%block title%}Скидки и акции{% endblock %}
+
+{% block сontent %}
+    {% for el in discounts%}
+      <div class = "alert alert-warning">
+            <h3>{{ el.title }}</h3>
+            <p>{{ el.text }}</p>
+        </div>
+    {% endfor%}
+{% endblock %}

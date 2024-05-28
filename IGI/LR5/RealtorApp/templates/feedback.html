@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% load filters %}
+{%block title%}Отзывы{% endblock %}
+
+{% block сontent %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Оставить комментарий</button>
+    </form>
+    {% for el in comments %}
+        <div style="background-color:lightgrey; margin:5px">
+            <h1>{{ el.user.username }}</h1>
+            <p>{{ el.text }}</p>
+            <p>Оценка: {{ el.mark}} Дата: {{ el.data|convert_time_to_local }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

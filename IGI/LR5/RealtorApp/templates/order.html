@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{%block title%}Про нас{% endblock %}
+
+{% block сontent %}
+    {% for el in requestIds %}
+        {% if el.UserId == userId%}
+            <p>Ваш заказ:</p>
+            {% for el1 in requests %}
+                {% if el1.requestId == el.idReq%}
+                    {% for el2 in jobs %}
+                        {% if el2.idJob == el1.JobId%}
+                           <li>{{el2.text}}</li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+            <p>Стоиомсть: {{el.cost}} Готов? {% if el.ready %} да {%else%} нет {% endif%}</p>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

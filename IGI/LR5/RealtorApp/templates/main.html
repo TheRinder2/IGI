@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{%block title%}Главная страница{% endblock %}
+
+{% block сontent %}
+    <h1>Главная страница</h1>
+    <h1>Наши услуги</h1>
+    <a href="?order=asc">Сортировать по возрастанию</a> |
+    <a href="?order=desc">Сортировать по убыванию</a>
+    <ul>
+        {% for el in elements %}
+            <li>
+                <p>{{el.text}} - {{el.cost}}</p>
+            </li>
+        {% endfor %}
+    </ul>
+    <h1>График</h1>
+    <canvas id="myChart" width="200" height="200"></canvas>
+    <script>
+        // Данные для графика
+        const data = {
+            labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май'],
+            datasets: [{
+                label: 'Продажи',
+                data: [120, 190, 90, 150, 70],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)'
+                ],
+            }]
+        };
+
+        const config = {
+            type: 'pie',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+    {% if user.is_authenticated%}
+        {% if data %}
+            <h1>Weather in {{ data.name }}</h1>
+            <p>Temperature: {{ data.main.temp }}°C</p>
+            <p>Weather: {{ data.weather.0.description }}</p>
+            <p>Humidity: {{ data.main.humidity }}%</p>
+            <p>Wind Speed: {{ data.wind.speed }} m/s</p>
+        {% else %}
+            <p>Could not fetch weather data.</p>
+        {% endif %}
+        {% if data1 %}
+        <h1>Random joke api:</h1>
+            <p>{{data1.setup}}</p>
+            <p>{{data1.punchline}}</p>
+        {% else %}
+            <p>Could not fetch dog image.</p>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{%block title%}Новости{% endblock %}
+
+{% block сontent %}
+    {% for el in new%}
+        <div>
+            <h3>{{ el.title }}</h3>
+            <p>{{ el.text }}</p>
+        </div>
+    {% endfor%}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block сontent %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+                {{ form }}
+            <div>
+                <button type="submit">Изменить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
