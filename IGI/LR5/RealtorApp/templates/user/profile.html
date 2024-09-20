@@ -9,6 +9,8 @@
     <h3>Телефон: {{ usernow.phone }}</h3>
 
     <a href="{% url 'profileedit'%}"><li>Изменить данные</li></a>
+    <a href="{% url 'profiledelete' %}"><li>Удалить профиль</li></a>
+
 
     {% if usernow.isworker == False%}
         {% if reqrent %}

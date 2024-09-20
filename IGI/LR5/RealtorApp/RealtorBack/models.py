@@ -102,3 +102,13 @@ class Time(models.Model):
 class Report(models.Model):
     text = models.TextField('Отчёт')
     userId = models.IntegerField('Id работника')
+
+
+class Banner(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='media/banners/')
+    link = models.URLField()
+
+    def __str__(self):
+        return self.title
+

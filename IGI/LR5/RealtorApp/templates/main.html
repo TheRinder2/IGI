@@ -8,9 +8,36 @@
         <div style="background-color:lightgrey; padding:10px; margin-bottom:5px">
             <img src="{{ lastnews.img.url }}" width="200" height="200">
             <h3>{{ lastnews.title }}</h3>
-            <p>{{ lastnews.text }}</p>
+            <p>{% if showFullText %}
+               {{ lastnews.text }}
+                {% else %}
+               {{ lastnews.text|slice:20 }}
+                <a href="{% url 'home' %}?showFullText=False">...</a>
+                {% endif %}</p>
         </div>
     {% endif %}
+
+
+    <div class="banner-container" data-interval="{{ banner_interval }}" >
+        {% if banners %}
+        {% for banner in banners %}
+         <div class="widths:200px;">
+                <a href="{{ banner.link }}" target="_blank">
+                    <img class="" height="200px" src="{{ banner.image.url }}" alt="{{ banner.title }}">
+                </a>
+         </div>
+        {% endfor %}
+        {% else %}
+        <p>No banners available.</p>
+        {% endif %}
+    </div>
+
+    <pre>
+        Тучка лопнула с утра,
+        Дождик льет — как из ведра.
+        Тучке надобен ремонт,
+        А тебе — хороший зонт.
+    </pre>
 
     <h1>Наши услуги</h1>
     <a href="?order=asc">Сортировать по возрастанию</a> |
@@ -70,15 +97,25 @@
             <p>Humidity: {{ data.main.humidity }}%</p>
             <p>Wind Speed: {{ data.wind.speed }} m/s</p>
         {% else %}
-            <p>Could not fetch weather data.</p>
+            <p>Weather data not found.</p>
         {% endif %}
         {% if data1 %}
         <h1>Random joke api:</h1>
             <p>{{data1.setup}}</p>
             <p>{{data1.punchline}}</p>
         {% else %}
-            <p>Could not fetch dog image.</p>
+            <p>Joke not found.</p>
         {% endif %}
     {% endif %}
+
+    <h1 style="text-align: center;"><b>Наши партнеры</b></h1>
+    <section style="text-align: center;">
+        <a href="https://belarusbank.by" title="BelarusBank" style="margin:5px;" target="_blank">
+            <img height="40px" src="media/BelarusbankLogo.jpg">
+        </a>
+        <a href="https://T-bank.by" title="TBank" style="margin:5px;" target="_blank">
+            <img height="40px" src="media/TbankLogo.png">
+        </a>
+    </section>
 
 {% endblock %}

@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from users.models import User
 from .forms import CommentForm, OfferRentForm, OfferImmForm
-from .models import New, FAQ, Vacancion, Rent, Discount, Contact, Comment, Time, Report, Immovables, RequestRent, RequestImm
+from .models import New, FAQ, Vacancion, Rent, Banner, Discount, Contact, Comment, Time, Report, Immovables, RequestRent, RequestImm
 from datetime import datetime
 from django.db.models import Sum, Count
 import requests
@@ -71,6 +71,7 @@ def get_random_joke():
     if response.status_code == 200:
         return response.json()
     else:
+
         return None
 
 
@@ -94,12 +95,22 @@ def index(request):
     except:
         logger.warning('Api warning')
 
+    banners = Banner.objects.all()
+    banner_interval = 3
+    if request.GET:
+        showFullText = bool(request.GET.get('showFullText', 'False'))
+    else:
+        showFullText = False
+
     context = {
         'lastnews': New.objects.all()[len(New.objects.all()) - 1],
         'data': data,
         'data1': data1,
         'elements': elements,
         'order': order,
+        'banners': banners,
+        'banner_interval': banner_interval,
+        'showFullText': showFullText,
     }
 
     return render(request, 'main.html', context)

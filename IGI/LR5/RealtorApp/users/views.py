@@ -5,7 +5,7 @@ from RealtorBack.models import RequestRent, RequestImm
 from .forms import UserRegisterForm, UserEditForm
 from .models import User
 from loguru import logger
-
+from django.contrib.auth.models import User as sistemUser
 
 def register(request):
     if request.method == 'POST':
@@ -77,3 +77,10 @@ def profileedit(request):
         'form': form
     }
     return render(request, 'user/profileedit.html', context=context)
+
+
+def profiledelete(request):
+
+    # Todo
+    
+    return render(request, 'user/profileDelete.html')
