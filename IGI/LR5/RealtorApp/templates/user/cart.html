@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{%block title%}Корзина{% endblock %}
+
+{% block сontent %}
+
+    {% if usernow.isworker == False %}
+        {% if reqrent %}
+            <h2>Ваша аренда:</h2>
+            {% for el in reqrent %}
+                <div style="background-color:lightgrey; margin:5px">
+                    <h3>{{ el.rent.text }}</h3>
+                    {% if el.discount %}
+                        <h3>Промокод: {{ el.discount.title }}</h3>
+                    {% endif %}
+                    <h3>{{ el.rent.cost }}</h3>
+                    <a href="{% url 'cartItemDelete' %}?id={{forloop.counter0}}&isRent=True">Удалить?</a>
+                </div>
+            {% endfor %}
+        {%endif%}
+        {% if reqimm %}
+            <h2>Ваша покупки недвижимости:</h2>
+            {% for el in reqimm %}
+                <div style="background-color:lightgrey; margin:5px">
+                    <h3>{{ el.imm.text }}</h3>
+                    {% if el.discount %}
+                        <h3>Промокод: {{ el.discount.title }}</h3>
+                    {% endif %}
+                    <h3>{{ el.imm.cost }}</h3>
+                    <a href="{% url 'cartItemDelete' %}?id={{forloop.counter0}}&isRent=False">Удалить?</a>
+                </div>
+            {% endfor %}
+        {%endif%}
+    {%endif%}
+{% endblock %}

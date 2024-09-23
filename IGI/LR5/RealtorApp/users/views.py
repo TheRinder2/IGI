@@ -58,6 +58,36 @@ def profile(request):
     print(workerimm)
     return render(request, 'user/profile.html', context=context)
 
+def cart(request):
+
+    logger.debug('Cart')
+    user = User.objects.filter(user=request.user)[0]
+    reqrent = RequestRent.objects.filter(user=request.user)
+    reqimm = RequestImm.objects.filter(user=request.user)
+
+    context = {
+        'usernow': user,
+        'reqrent': reqrent,
+        'reqimm': reqimm,
+    }
+    return render(request, 'user/cart.html', context=context)
+
+
+def cartItemDelete(request):
+    logger.debug('Cart item del')
+    try:
+        id = int(request.GET.get('id'))
+        isRent = (request.GET.get('isRent') == "True")
+    except:
+        logger.debug('Exception on delete')
+
+    if isRent:
+        print(RequestRent.objects.filter(user=request.user)[id])
+        RequestRent.objects.filter(user=request.user)[id].delete()
+    else:
+        RequestImm.objects.filter(user=request.user)[id].delete()
+    return redirect('cart')
+
 
 def profileedit(request):
 

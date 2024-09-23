@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{%block title%}Отзывы{% endblock %}
+{%block title%}Профиль{% endblock %}
 
 {% block сontent %}
 
@@ -12,7 +12,7 @@
     <a href="{% url 'profiledelete' %}"><li>Удалить профиль</li></a>
 
 
-    {% if usernow.isworker == False%}
+    {% if usernow.isworker == False %}
         {% if reqrent %}
             <h2>Ваша аренда:</h2>
             {% for el in reqrent %}

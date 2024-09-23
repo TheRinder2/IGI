@@ -221,51 +221,12 @@ def discount(request):
 
 
 def offersRent(request):
-    # cost = 0
-    # if request.method == 'POST':
-    #     formrent = OfferRentForm(request.POST)
-    #     if formrent.is_valid():
-    #         selected_idx = formrent.cleaned_data['options']
-    #         selected_record = Rent.objects.filter(id__in=selected_idx)[0]
-    #         cost = selected_record.cost
-    #         logger.debug('Rent accepted')
-    #         try:
-    #             prom = formrent.cleaned_data['discount']
-    #             dis = Discount.objects.filter(key=prom, ntype=selected_record.ntype)[0]
-    #             cost *= dis.uncost
-    #             logger.debug('Промокод найден')
-    #         except:
-    #             dis = None
-    #             logger.debug('Промокод не найден')
-    #         RequestRent.objects.create(rent=selected_record, user=request.user, discount=dis, ready=False)
-    # else:
-    #     formrent = OfferRentForm()
     content = {
         'rents': Rent.objects.all(),
     }
     return render(request, 'requestRent.html', content)
 
 def offersImm(request):
-    # cost = 0
-    # if request.method == 'POST':
-    #     formimm = OfferImmForm(request.POST)
-    #     if formimm.is_valid():
-    #         selected_idx = formimm.cleaned_data['options']
-    #         selected_record = Immovables.objects.filter(id__in=selected_idx)[0]
-    #         cost = selected_record.cost
-    #         logger.debug('Immovables accepted')
-    #         try:
-    #             prom = formimm.cleaned_data['discount']
-    #             dis = Discount.objects.filter(key=prom, ntype=selected_record.ntype)[0]
-    #             cost *= dis.uncost
-    #             logger.debug('Промокод найден')
-    #         except:
-    #             dis = None
-    #             logger.debug('Промокод не найден')
-    #         RequestImm.objects.create(imm=selected_record, user=request.user, discount=dis, ready=False)
-    #
-    # else:
-    #     formimm = OfferImmForm()
     content = {
         'imms': Immovables.objects.all(),
     }

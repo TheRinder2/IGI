@@ -26,14 +26,15 @@
             <a href="{% url 'discounts'%}"><li>Скидки и акции</li></a>
 
              {% if user.is_authenticated%}
-            <a href="{% url 'profile'%}"><li>Личный кабинет</li></a>
-            <a href="{% url 'requestRent'%}"><li>Аренда</li></a>
-            <a href="{% url 'requestImm'%}"><li>Покупка</li></a>
-            <a href="{% url 'time'%}"><li>Время</li></a>
-            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
-                {% csrf_token %}
-            </form>
-            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li>Выйти</li></a>
+                <a href="{% url 'profile'%}"><li>Личный кабинет</li></a>
+                <a href="{% url 'requestRent'%}"><li>Аренда</li></a>
+                <a href="{% url 'requestImm'%}"><li>Покупка</li></a>
+                <a href="{% url 'cart'%}"><li>Корзина</li></a>
+                <a href="{% url 'time'%}"><li>Время</li></a>
+                <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                    {% csrf_token %}
+                </form>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li>Выйти</li></a>
              {% else %}
                 <a href="{% url 'login'%}"><li>Вход</li></a>
                 <a href="{% url 'registration'%}"><li>Регистрация</li></a>
