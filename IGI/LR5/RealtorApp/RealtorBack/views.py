@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from users.models import User
-from .forms import CommentForm, OfferRentForm, OfferImmForm
+from .forms import CommentForm, DiscountForm
 from .models import New, FAQ, Vacancion, Rent, Banner, Discount, Contact, Comment, Time, Report, Immovables, RequestRent, RequestImm
 from datetime import datetime
 from django.db.models import Sum, Count
@@ -116,7 +116,6 @@ def index(request):
     return render(request, 'main.html', context)
 
 
-
 def registration(request):
     return render(request, 'registration.html')
 
@@ -125,6 +124,57 @@ def news(request):
     new = reversed(New.objects.all())
     return render(request, 'news.html', {'new': new})
 
+
+def newsDetails(request):
+
+    id = int(request.GET.get('id'))
+    try:
+        item = New.objects.all()[id]
+    except IndexError:
+        #TODO Error page
+        return index(request)
+    return render(request, 'newsDetails.html', {'newsitem': item})
+
+
+def itemDetails(request):
+    logger.debug(request.method)
+    try:
+        id = int(request.GET.get('id'))
+        isRent = request.GET.get('isRent') == "True"
+        if isRent:
+            item = Rent.objects.all()[id]
+        else:
+            item = Immovables.objects.all()[id]
+    except:
+        #TODO Error page
+        return index(request)
+
+    cost = 0
+    if request.method == 'POST':
+        formdic = DiscountForm(request.POST)
+        if request.GET.get('isRent') == "True":
+            selected_record = Rent.objects.all()[id]
+        else:
+            selected_record = Immovables.objects.all()[id]
+        if formdic.is_valid():
+            cost = selected_record.cost
+            try:
+                prom = formdic.cleaned_data['discount']
+                logger.debug(prom)
+                dis = Discount.objects.filter(key=prom, ntype=selected_record.ntype)[0]
+                cost *= dis.uncost
+                logger.debug('Промокод найден')
+            except:
+                dis = None
+                logger.debug('Промокод не найден')
+            if request.GET.get('isRent') == "True":
+                RequestRent.objects.create(rent=selected_record, user=request.user, discount=dis, ready=False)
+            else:
+                RequestImm.objects.create(imm=selected_record, user=request.user, discount=dis, ready=False)
+    else:
+        formdic = DiscountForm()
+
+    return render(request, 'itemDetails.html', {'item': item, 'form':formdic, 'totalcost':cost})
 
 def faq(request):
     posts = FAQ.objects.all()
@@ -171,57 +221,53 @@ def discount(request):
 
 
 def offersRent(request):
-    cost = 0
-    if request.method == 'POST':
-        formrent = OfferRentForm(request.POST)
-        if formrent.is_valid():
-            selected_idx = formrent.cleaned_data['options']
-            selected_record = Rent.objects.filter(id__in=selected_idx)[0]
-            cost = selected_record.cost
-            logger.debug('Rent accepted')
-            try:
-                prom = formrent.cleaned_data['discount']
-                dis = Discount.objects.filter(key=prom, ntype=selected_record.ntype)[0]
-                cost *= dis.uncost
-                logger.debug('Промокод найден')
-            except:
-                dis = None
-                logger.debug('Промокод не найден')
-            RequestRent.objects.create(rent=selected_record, user=request.user, discount=dis, ready=False)
-    else:
-        formrent = OfferRentForm()
+    # cost = 0
+    # if request.method == 'POST':
+    #     formrent = OfferRentForm(request.POST)
+    #     if formrent.is_valid():
+    #         selected_idx = formrent.cleaned_data['options']
+    #         selected_record = Rent.objects.filter(id__in=selected_idx)[0]
+    #         cost = selected_record.cost
+    #         logger.debug('Rent accepted')
+    #         try:
+    #             prom = formrent.cleaned_data['discount']
+    #             dis = Discount.objects.filter(key=prom, ntype=selected_record.ntype)[0]
+    #             cost *= dis.uncost
+    #             logger.debug('Промокод найден')
+    #         except:
+    #             dis = None
+    #             logger.debug('Промокод не найден')
+    #         RequestRent.objects.create(rent=selected_record, user=request.user, discount=dis, ready=False)
+    # else:
+    #     formrent = OfferRentForm()
     content = {
-        'form': formrent,
         'rents': Rent.objects.all(),
-        'totalcost': cost
     }
     return render(request, 'requestRent.html', content)
 
 def offersImm(request):
-    cost = 0
-    if request.method == 'POST':
-        formimm = OfferImmForm(request.POST)
-        if formimm.is_valid():
-            selected_idx = formimm.cleaned_data['options']
-            selected_record = Immovables.objects.filter(id__in=selected_idx)[0]
-            cost = selected_record.cost
-            logger.debug('Immovables accepted')
-            try:
-                prom = formimm.cleaned_data['discount']
-                dis = Discount.objects.filter(key=prom, ntype=selected_record.ntype)[0]
-                cost *= dis.uncost
-                logger.debug('Промокод найден')
-            except:
-                dis = None
-                logger.debug('Промокод не найден')
-            RequestImm.objects.create(imm=selected_record, user=request.user, discount=dis, ready=False)
-
-    else:
-        formimm = OfferImmForm()
+    # cost = 0
+    # if request.method == 'POST':
+    #     formimm = OfferImmForm(request.POST)
+    #     if formimm.is_valid():
+    #         selected_idx = formimm.cleaned_data['options']
+    #         selected_record = Immovables.objects.filter(id__in=selected_idx)[0]
+    #         cost = selected_record.cost
+    #         logger.debug('Immovables accepted')
+    #         try:
+    #             prom = formimm.cleaned_data['discount']
+    #             dis = Discount.objects.filter(key=prom, ntype=selected_record.ntype)[0]
+    #             cost *= dis.uncost
+    #             logger.debug('Промокод найден')
+    #         except:
+    #             dis = None
+    #             logger.debug('Промокод не найден')
+    #         RequestImm.objects.create(imm=selected_record, user=request.user, discount=dis, ready=False)
+    #
+    # else:
+    #     formimm = OfferImmForm()
     content = {
-        'form': formimm,
         'imms': Immovables.objects.all(),
-        'totalcost': cost
     }
     return render(request, 'requestImm.html', content)
 

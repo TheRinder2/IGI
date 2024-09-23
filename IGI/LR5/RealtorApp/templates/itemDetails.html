@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{%block title%}Новости{% endblock %}
+
+{% block сontent %}
+    <div style="background-color:lightgrey; font-size:25px; padding:10px; margin-bottom:5px">
+<!--            <img src="{{ newsitem.img.url }}" width="500" height="500">-->
+        <h3>{{ item.text }}</h3>
+        <h3>{{ item.cost }}</h3>
+        <h3>{{ item.ntype }}</h3>
+    </div>
+<form method="post">
+    {% csrf_token  %}
+    {{ form }}
+    <button type="submit"> add to <img height="20зч" src="media/cart.png" alt="Купить"></button>
+</form>
+<h3>TotalCost: {{ totalcost }}</h3>
+
+{% endblock %}

@@ -6,7 +6,9 @@
     {% for el in new%}
         <div style="background-color:lightgrey; padding:10px; margin-bottom:5px">
              <img src="{{ el.img.url }}" width="200" height="200">
-            <h3>{{ el.title }}</h3>
+            <a href="{% url 'newsDetails' %}?id={{forloop.counter0}}">
+                <h3>{{ el.title }}</h3>
+            </a>
             <p>{{ el.text }}</p>
         </div>
     {% endfor%}

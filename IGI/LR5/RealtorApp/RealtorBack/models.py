@@ -52,15 +52,16 @@ class Rent(models.Model):
     ntype = models.IntegerField(default=0)
     text = models.TextField('Услуга')
     cost = models.IntegerField('Цена')
+    media = models.ImageField(null=True)
     duration = models.DateTimeField('Длительность аренды')
 
 
 class Immovables(models.Model):
     worker = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     ntype = models.IntegerField()
-
     text = models.TextField('Описание')
     cost = models.IntegerField('Цена')
+    media = models.ImageField(null=True)
 
     def __str__(self):
         return self.text

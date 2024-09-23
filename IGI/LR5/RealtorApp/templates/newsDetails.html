@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{%block title%}Новости{% endblock %}
+
+{% block сontent %}
+        <div style="background-color:lightgrey; font-size:25px; padding:10px; margin-bottom:5px">
+            <img src="{{ newsitem.img.url }}" width="500" height="500">
+            <h3>{{ newsitem.title }}</h3>
+            <p>{{ newsitem.text }}</p>
+        </div>
+{% endblock %}

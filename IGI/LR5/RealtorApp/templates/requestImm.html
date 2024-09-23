@@ -4,11 +4,12 @@
 
 {% block сontent %}
     <p>Выберите интересующие вас услуги покупки</p>
-    <form method="post">
-        {% csrf_token %}
-        {{form}}
-        <button type="submit">Сделать заказ</button>
-    </form>
-
-<p> Общая сумма: {{totalcost}}$</p>
+    {% for item in imms %}
+    <div style="background-color:lightgrey;">
+        <a style="text-decoration:none; color:black;" href="{% url 'itemDetails' %}?id={{forloop.counter0}}&isRent=False">
+            <h3> {{ item.text }}</h3>
+            <h4> {{ item.cost }}</h4>
+        </a>
+    </div>
+    {% endfor %}
 {% endblock %}

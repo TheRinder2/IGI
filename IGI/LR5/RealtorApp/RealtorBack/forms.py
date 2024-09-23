@@ -19,21 +19,16 @@ class CommentForm(forms.Form):
         return user
 
 
-class OfferRentForm(forms.Form):
-    options = forms.ChoiceField(
-        choices=[(j.id, j.text + ' Тип недвижимости:' + str(j.ntype) + ' ' + str(j.cost) + '$') for j in Rent.objects.all()],
-        widget=forms.RadioSelect,
-        required=True
-    )
+class DiscountForm(forms.Form):
     discount = forms.CharField(max_length=15, required=False)
 
 
-class OfferImmForm(forms.Form):
-    options = forms.ChoiceField(
-        choices=[(j.id, j.text + ' Тип недвижимости:' + str(j.ntype) + ' ' + str(j.cost) + '$') for j in Immovables.objects.all()],
-        widget=forms.RadioSelect,
-        required=True
-    )
-    discount = forms.CharField(max_length=15, required=False)
+# class OfferImmForm(forms.Form):
+#     options = forms.ChoiceField(
+#         choices=[(j.id, j.text + ' Тип недвижимости:' + str(j.ntype) + ' ' + str(j.cost) + '$') for j in Immovables.objects.all()],
+#         widget=forms.RadioSelect,
+#         required=True
+#     )
+#     discount = forms.CharField(max_length=15, required=False)
 
 
