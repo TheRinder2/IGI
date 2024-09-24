@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{%block title%}Страница оплаты{% endblock %}
+
+{% block сontent %}
+
+    {% if usernow.isworker == False %}
+        <h3>Какие-то действия по оплате...</h3>
+        <h3>Корзина оплачена</h3>
+    {%endif%}
+{% endblock %}

@@ -129,7 +129,8 @@ def newsDetails(request):
 
     id = int(request.GET.get('id'))
     try:
-        item = New.objects.all()[id]
+        items = New.objects.all()
+        item = items[len(items) - id - 1]
     except IndexError:
         #TODO Error page
         return index(request)

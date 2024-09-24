@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
-from users.views import register, profile, profileedit, profiledelete, cart, cartItemDelete
+from users.views import register, profile, profileedit, profiledelete, cart, cartItemDelete, cartPaid
 
 urlpatterns = [
     path('', views.index, name='home'),
@@ -11,6 +11,7 @@ urlpatterns = [
     path('profile', profile, name='profile'),
     path('cart', cart, name='cart'),
     path('cartItemDelete', cartItemDelete, name='cartItemDelete'),
+    path('cartPaid', cartPaid, name='cartPaid'),
     path('profileedit', profileedit, name='profileedit'),
     path('profiledelete', profiledelete, name='profiledelete'),
     path('logout/', auth_views.LogoutView.as_view(template_name='main.html'), name='logout'),

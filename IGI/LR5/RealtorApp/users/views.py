@@ -73,6 +73,20 @@ def cart(request):
     return render(request, 'user/cart.html', context=context)
 
 
+def cartPaid(request):
+
+    logger.debug('Cart Paid')
+    user = User.objects.filter(user=request.user)[0]
+    #TODO PAIMENT
+    RequestRent.objects.all().delete()
+    RequestImm.objects.all().delete()
+
+
+    context = {
+        'usernow': user,
+    }
+    return render(request, 'user/cartPaid.html', context=context)
+
 def cartItemDelete(request):
     logger.debug('Cart item del')
     try:

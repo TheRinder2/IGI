@@ -26,9 +26,12 @@
                         <h3>Промокод: {{ el.discount.title }}</h3>
                     {% endif %}
                     <h3>{{ el.imm.cost }}</h3>
-                    <a href="{% url 'cartItemDelete' %}?id={{forloop.counter0}}&isRent=False">Удалить?</a>
+                    <a href="{% url 'cartItemDelete' %}?id={{forloop.counter0}}&isRent=False">Удалить</a>
                 </div>
             {% endfor %}
+        {%endif%}
+        {% if reqrent or reqimm %}
+            <a href="{% url 'cartPaid' %}">Оплатить</a>
         {%endif%}
     {%endif%}
 {% endblock %}
