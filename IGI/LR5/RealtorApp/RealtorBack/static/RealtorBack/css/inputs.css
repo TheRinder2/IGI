@@ -1,0 +1,79 @@
+form {
+  margin: 10px 0;
+  background-color: rgb(40, 40, 40);
+  color: #f0f0f0;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+input:enabled,
+select:enabled,
+textarea:enabled {
+  border: 2px solid #28a745;
+  background-color: #2c2c2e;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px #2c2c2e inset !important;
+    box-shadow: 0 0 0 30px #2c2c2e inset !important;
+    -webkit-text-fill-color: #f0f0f0 !important;
+}
+
+input[required],
+select[required],
+textarea[required] {
+  border: 2px solid #ffc107;
+  background-color: #3a3a3c;
+}
+
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+  border: 2px solid #dc3545; 
+  background-color: #3c3c3e;
+  opacity: 0.5; 
+}
+
+
+input:out-of-range,
+select:out-of-range {
+  border: 2px solid #17a2b8; 
+  background-color: #2c2c2e;
+}
+
+input[type="checkbox"]:checked {
+  accent-color: #28a745;
+}
+
+input[type="radio"]:checked {
+  accent-color: #007bff;
+}
+
+input, select, textarea {
+  color: #fff;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 10px 0;
+  /* width: 100%; */
+}
+
+button[type="submit"] {
+  background-color: #007bff; 
+  color: white; 
+  border: none; 
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+button[type="submit"]:active {
+  background-color: #004494;
+}

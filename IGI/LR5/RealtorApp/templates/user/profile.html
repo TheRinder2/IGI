@@ -2,12 +2,12 @@
 {%block title%}Профиль{% endblock %}
 
 {% block сontent %}
-
-    <h2>UserName: {{ usernow.user }}</h2>
-    <h3>Дата рождения: {{ usernow.birth_date }}</h3>
-    <h3>ФИО: {{ usernow.fullName }}</h3>
-    <h3>Телефон: {{ usernow.phone }}</h3>
-
+<section itemscope itemtype="http://schema.org/Person">
+    <h2> User Name: <span itemprop="UserName"> {{ usernow.user }} </span> </h2>
+    <h3> Дата рождения: <span itemprop="BirthDate"> {{ usernow.birth_date }} </span> </h3>
+    <h3> ФИО: <span itemprop="Name"> {{ usernow.fullName }} </span></h3>
+    <h3> Телефон: <span itemprop="TelNumber"> {{ usernow.phone }} </span></h3>
+</section>
     <a href="{% url 'profileedit'%}"><li>Изменить данные</li></a>
     <a href="{% url 'profiledelete' %}"><li>Удалить профиль</li></a>
 
@@ -16,7 +16,7 @@
         {% if reqrent %}
             <h2>Ваша аренда:</h2>
             {% for el in reqrent %}
-                <div style="background-color:lightgrey; margin:5px">
+                <div class="div-dark-box">
                     <h3>{{ el.rent.text }}</h3>
                     {% if el.discount %}
                         <h3>Промокод: {{ el.discount.title }}</h3>
@@ -28,7 +28,7 @@
         {% if reqimm %}
             <h2>Ваша покупки недвижимости:</h2>
             {% for el in reqimm %}
-                <div style="background-color:lightgrey; margin:5px">
+                <div class="div-dark-box">
                     <h3>{{ el.imm.text }}</h3>
                     {% if el.discount %}
                         <h3>Промокод: {{ el.discount.title }}</h3>
@@ -43,7 +43,7 @@
         {% if workerrent %}
             <h2>Сделки по аренде недвижимости:</h2>
             {% for el in workerrent %}
-                <div style="background-color:lightgrey; margin:5px">
+                <div class="div-dark-box">
                     <h3>Имя пользователя: {{ el.user.username }}</h3>
                     <h3>Сделка:{{ el.rent.text }}</h3>
                     {% if el.discount %}
@@ -57,7 +57,7 @@
         {% if workerimm %}
             <h2>Сделки по недвижимости:</h2>
             {% for el in workerimm %}
-                <div style="background-color:lightgrey; margin:5px">
+                <div class="div-dark-box">
                     <h3>Имя пользователя: {{ el.user.username }}</h3>
                     <h3>Сделка:{{ el.imm.text }}</h3>
                     {% if el.discount %}

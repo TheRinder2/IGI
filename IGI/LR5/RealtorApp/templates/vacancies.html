@@ -1,40 +1,38 @@
 {% extends 'layout.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'RealtorBack/css/vacancies.css' %}">
+{% endblock %}
 
 {%block title%}Вакансии{% endblock %}
 
 {% block сontent %}
     <table border="1" >
-    <thead>
-      <tr>
+    <thead >
+      <tr style="background-color: rgb(55, 55, 55)">
           <th>Должность</th>
           <th>Локация</th>
           <th>Тип занятости</th>
           <th>Описание</th>
-          <th>Контакт</th>
           <th>Зарплата</th>
-          <th>Требования</th>
-          <th>Опыт работы</th>
-          <th>Дополнительные бонусы</th>
-          <th>Срок подачи заявок</th>
+          <th>Откликнуться</th>
       </tr>
     </thead>
     <tbody>
 
         {% for el in vacancion%}
             {% if forloop.counter|divisibleby:2 %}
-                <tr style="background-color:lightgreen;">
+                <tr style="background-color: rgb(40, 40, 40)">
             {% else %}
-                <tr style="background-color:lightyellow;">
+                <tr style="background-color: rgb(55, 55, 55)">
             {% endif %}
             <td>{{ el.title }}</td>
             <td>Минск </td>
             <td>Полная занятость</td>
             <td>{{ el.text }}</td>
-            <td><a href="">jobs@SuperRent.com</a></td>
+            {% comment %} <td><a href="">jobs@SuperRent.com</a></td> {% endcomment %}
             <td>{{ el.cost }}$ в час</td>
-            <td colspan="2">Высшее образование, коммуникабельность, опыт работы: 2 года</td>
-            <td>Бонусы за достижение целей</td>
-            <td>1 января 2025</td>
+            <td><a href="#" class="apply-button">Подать заявку</a></td>
         </tr>
         {% endfor%}
     </tbody>

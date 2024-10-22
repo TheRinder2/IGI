@@ -1,17 +1,27 @@
 {% extends 'layout.html' %}
+{%load static%}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'RealtorBack/css/contacts.css' %}">
+{% endblock %}
 
 {%block title%}Контакты{% endblock %}
 
 {% block сontent %}
+<div class="contacts">
     {% for el in Contact%}
-      <div style="background-color:lightgrey; margin:5px">
-            <h3>{{ el.full_name }}</h3>
+    <div class="employee">
+        {% if el.img %}
+        <img src="{{ el.img.url }}" alt="{{ el.full_name }}" width="150" height="150">
+        {% endif %}
+        <h2>{{ el.full_name }}</h2>
+        <p>Менеджер по продажам</p>
+        <p>Описание: {{el.description}}</p>
+        <div class="contact-info">
             <p>Номер телефона: {{ el.phone }}</p>
-            <p>Описание: {{el.description}}</p>
-            {% if el.img %}
-                <img src="{{ el.img.url }}" alt="{{ el.full_name }}" width="150" height="150">
-            {% endif %}
-
         </div>
+    </div>
     {% endfor%}
+</div>
+
 {% endblock %}

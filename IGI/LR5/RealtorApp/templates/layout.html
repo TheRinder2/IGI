@@ -1,50 +1,71 @@
 <!doctype html>
 <html lang="ru">
-<head>
+    <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>{% block title %}{% endblock %}</title>
+
     <link rel="icon" href="media/icons/house.png" type="image/png">
+    <link rel="stylesheet" href="{% static 'RealtorBack/css/site_style.css' %}">
+    <link rel="stylesheet" href="{% static 'RealtorBack/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'RealtorBack/css/dropdown.css' %}">
+    <link rel="stylesheet" href="{% static 'RealtorBack/css/inputs.css' %}">
+    {% block style %}
+    {% endblock %}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-    <aside>
-        <div class="">
-            <img class="" height="70px" src="media/CompanyLogo.png" alt="Logo">
+<body>
+    <nav class="navbar">
+            
+        <img class="" height="50px" src="media/CompanyLogo.png" alt="Logo">
+        
+        <a class="navbar-item" href="{% url 'home'%}">Главная</a>
+        <div class="navbar-item dropdown">
+            <button class="dropbtn">О нас</button>
+            <div class="dropdown-content">
+                <a class="navbar-item" href="{% url 'about'%}">О компании</a>
+                <a class="navbar-item" href="{% url 'news'%}">Новости</a>
+                <a class="navbar-item" href="{% url 'faq'%}">Вопросы и ответы</a>
+                <a class="navbar-item" href="{% url 'contacts'%}">Контакты</a>
+                <a class="navbar-item" href="{% url 'policy'%}">Политика конфиденциальности</a>
+                <a class="navbar-item" href="{% url 'vacancies'%}">Вакансии</a>
+                <a class="navbar-item" href="{% url 'feedback'%}">Отзывы</a>
+                <a class="navbar-item" href="{% url 'discounts'%}">Скидки и акции</a>
+            </div>
         </div>
-    <h3>Навигация</h3>
-        <ul>
-            <a href="{% url 'home'%}"><li>Главная</li></a>
-            <a href="{% url 'about'%}"><li>О компании</li></a>
-            <a href="{% url 'news'%}"><li>Новости</li></a>
-            <a href="{% url 'faq'%}"><li>FAQ</li></a>
-            <a href="{% url 'contacts'%}"><li>Контакты</li></a>
-            <a href="{% url 'policy'%}"><li>Политика конфиденциальности</li></a>
-            <a href="{% url 'vacancies'%}"><li>Вакансии</li></a>
-            <a href="{% url 'feedback'%}"><li>Отзывы</li></a>
-            <a href="{% url 'discounts'%}"><li>Скидки и акции</li></a>
 
              {% if user.is_authenticated%}
-                <a href="{% url 'profile'%}"><li>Личный кабинет</li></a>
-                <a href="{% url 'requestRent'%}"><li>Аренда</li></a>
-                <a href="{% url 'requestImm'%}"><li>Покупка</li></a>
-                <a href="{% url 'cart'%}"><li>Корзина</li></a>
-                <a href="{% url 'time'%}"><li>Время</li></a>
+                <a class="navbar-item" href="{% url 'profile'%}">Личный кабинет</a>
+                <div class="navbar-item dropdown">
+                    <button class="dropbtn">Услуги</button>
+                    <div class="dropdown-content">
+                        <a class="navbar-item" href="{% url 'requestRent'%}">Аренда</a>
+                        <a class="navbar-item" href="{% url 'requestImm'%}">Покупка</a>
+                    </div>
+                </div>
+                <a class="navbar-item" href="{% url 'cart'%}">Корзина</a>
+                <a class="navbar-item" href="{% url 'time'%}">Время</a>
                 <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
                     {% csrf_token %}
                 </form>
-                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li>Выйти</li></a>
+                <a class="navbar-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Выйти</a>
              {% else %}
-                <a href="{% url 'login'%}"><li>Вход</li></a>
-                <a href="{% url 'registration'%}"><li>Регистрация</li></a>
+                <a class="navbar-item" href="{% url 'login'%}">Вход</a>
+                <a class="navbar-item" href="{% url 'registration'%}">Регистрация</a>
              {% endif %}
 
         </ul>
-    </aside>
-    <main>
+    </nav>
+    <main class="main-container">
         {% block сontent %}
         {% endblock %}
     </main>
 </body>
+<footer>
+
+</footer>
 </html>

@@ -12,3 +12,11 @@ def convert_time_to_local(dt):
 @register.filter
 def convert_cost_to_discount(cs):
     return int(100 - cs * 100)
+
+@register.filter
+def range_filter(value):
+    return range(value)
+
+@register.filter
+def sub(value, arg):
+    return value - arg

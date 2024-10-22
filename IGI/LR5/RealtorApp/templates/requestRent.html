@@ -1,15 +1,27 @@
 {% extends 'layout.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'RealtorBack/css/catalog.css' %}">
+{% endblock %}
 
 {%block title%}Заказ{% endblock %}
 
 {% block сontent %}
-    <p>Выберите интересующие вас услуги аренды</p>
-    {% for item in rents %}
-    <div style="background-color:lightgrey;">
-        <a style="text-decoration:none; color:black;" href="{% url 'itemDetails' %}?id={{forloop.counter0}}&isRent=True">
-            <h3> {{ item.text }}</h3>
-            <h4> {{ item.cost }}</h4>
-        </a>
+    <p>Выберите интересующие вас услуги покупки</p>
+
+    <div class="catalog">
+        {% for item in rents %}
+        <div class="property-card">
+            <img src="" alt="Квартира" class="property-image">
+            <a style="text-decoration:none; color:white;" href="{% url 'itemDetails' %}?id={{forloop.counter0}}&isRent=False">
+                <div class="property-details">
+                    <h2 class="property-title">{{ item.text }}</h2>
+                    <p class="property-description">{{ item.cost }}</p>
+                    {% comment %} <a href="#" class="property-button">Подробнее</a> {% endcomment %}
+                </div>
+            </a>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 {% endblock %}

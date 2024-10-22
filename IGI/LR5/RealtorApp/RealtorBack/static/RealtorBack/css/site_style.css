@@ -1,0 +1,147 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap'); */
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background-color: rgb(25, 25, 25);
+    color: whitesmoke;
+}
+
+p {
+    margin: 0px 0;
+    padding: 5px;
+    text-indent: 0.5em; 
+    text-align: left;
+    /* font-variant: small-caps;  */
+    word-spacing: 0.1em;
+    letter-spacing: 0.01em; 
+    overflow-wrap: break-word; 
+}
+button {
+    transition: all 0.5s;
+}
+.div-dark-box{
+    background-color: rgb(40, 40, 40);
+    color: whitesmoke;
+    padding: 5px;
+}
+.my-main-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg-site {
+    background: beige;
+}
+
+.bebas-font{
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.dancing-script-font{
+    font-family: 'Dancing Script', cursive;
+}
+
+.my-align-center{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.my-align-left{
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+}
+
+.main-container{
+    margin: 0;
+    padding: 0 5% 0 5%;
+    /* width: 100%; */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+td:empty {
+    background-color: rgb(107, 107, 107);
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 2px solid black;
+}
+
+th {
+    background-color: rgb(40, 40, 40);
+}
+
+tr:hover {
+    background-color: rgb(55, 55, 55);
+}
+
+
+.grad-text{
+    font-family: 'Dancing Script', cursive;
+    font-size: 30px;
+    color: transparent;
+	-webkit-background-clip: text;
+	background-clip: text;
+	background-image: linear-gradient(to right, #03001e, #7303c0,#ec38bc,#fdeff9);
+}
+
+/* Медиа-запросы для отображения страниц */
+@media (max-width: 600px) {
+    body {
+        padding: 0px 10px;
+    }
+
+    h1 {
+        font-size: 1.5em; /* Уменьшение размера заголовка */
+    }
+
+    p {
+        font-size: 0.7em; /* Уменьшение размера текста */
+    }
+
+    button {
+        width: 100%; /* Кнопки на всю ширину */
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1200px) {
+    body {
+        padding: 0 15px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+}
+
+@media (min-width: 1201px) {
+    body {
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    p {
+        font-size: 1.1em;
+    }
+}

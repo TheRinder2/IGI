@@ -7,7 +7,7 @@
         {% if reqrent %}
             <h2>Ваша аренда:</h2>
             {% for el in reqrent %}
-                <div style="background-color:lightgrey; margin:5px">
+                <div class="div-dark-box">
                     <h3>{{ el.rent.text }}</h3>
                     {% if el.discount %}
                         <h3>Промокод: {{ el.discount.title }}</h3>
@@ -20,7 +20,7 @@
         {% if reqimm %}
             <h2>Ваша покупки недвижимости:</h2>
             {% for el in reqimm %}
-                <div style="background-color:lightgrey; margin:5px">
+                <div class="div-dark-box">
                     <h3>{{ el.imm.text }}</h3>
                     {% if el.discount %}
                         <h3>Промокод: {{ el.discount.title }}</h3>

@@ -6,7 +6,7 @@ from .models import Comment, Rent, Immovables
 class CommentForm(forms.Form):
 
     text = forms.CharField(widget=forms.Textarea)
-    mark = forms.IntegerField(min_value=0, max_value=10)
+    mark = forms.IntegerField(min_value=0, max_value=5)
 
 
     def save(self, user, commit=True):

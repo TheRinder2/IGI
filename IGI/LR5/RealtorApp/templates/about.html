@@ -1,26 +1,31 @@
 {% extends 'layout.html' %}
-
+{% load static %}
 {%block title%}Про нас{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'RealtorBack/css/about.css' %}">
+{% endblock %}
 
 {% block сontent %}
+    <div class="company-name">SUPERRENT</div>
     <dl id="topside">
         <dt>Информация о компании:</dt>
-        <dd>
-            Агенство недвижимости <abbr title="ООО SuperRent">ByKaxxa</abbr> - это современная сеть автомобильных парковок, предоставляющая высококачественные услуги
+        <p>
+            Агенство недвижимости <abbr title="ООО SuperRent">SuperRent</abbr> - это современная сеть автомобильных парковок, предоставляющая высококачественные услуги
             хранения и обслуживания транспортных средств.
-            Компания была основана в 2017 году и с тех пор стремится предоставлять удобные и
+            Компания была основана в 2017 году в и с тех пор стремится предоставлять удобные и
             безопасные места для парковки автомобилей, мотоциклов и других транспортных средств.
-        </dd>
+        </p>
         <dt>История по годам:</dt>
-        <dd>
-            <ul type="circle">
-                <li><strong>2017</strong>: Основание компании "SuperRent".</li>
+        <dd class="history">
+            <ul class="context" type="circle">
+                <li><strong>2017</strong>: Основание компании <dfn id="def-SuperRent">"SuperRent"</dfn></li>
                 <li><strong>2019</strong>: Запуск нашего первого крупного аукциона в центре Минска.</li>
                 <li><strong>2023</strong>: Улучшение технологий безопасности и предоставления услуг по аренде.</li>
             </ul>
         </dd>
+
         <dt>Реквизиты:</dt>
-        <dd>
+        <dd class="requisites">
             <ul type="circle">
                 <li>Юридический адрес: ул. Гикало, 9, Минск, Беларусь</li>
                 <li>УНП: 1234567890</li>
@@ -34,8 +39,12 @@
     <div class="block-logo-promo">
         <div>
             <p class=""><b>Наш логотип:</b></p>
-            <img class="" height="100px" src="media/CompanyLogo.png" alt="Logo">
-            <a href="media/CompanyLogo.png" download>Скачать логотип</a>
+            <figure>
+                <div class="logo-container">
+                    <img class="logo" height="100px" src="media/CompanyLogo.png" alt="Logo">
+                </div>    
+                <figcaption><a href="media/CompanyLogo.png" download>Скачать логотип</a></figcaption>
+            </figure>
         </div>
         <div>
             <p class="text-bold35"><b>Наш промо ролик:</b></p>
@@ -51,15 +60,13 @@
         </div>
     </div>
 
-    <div style="text-align:center; margin:auto; width:400px; background:lightgrey;">
-        <p>Сертификат</p>
-        <div>
-            <p>Единый реестр аренды</p>
-            <p><b>Свидетельство</b></p>
-            <p>о внесении сведений</p>
-            <p>Общество ограниченной ответственности "<i>SuperRent</i>"</p>
-            <p><u>Реестровый номер: 2212</u></p>
-        </div>
+    <div class="certificate">
+        <h1>Сертификат</h1>
+        <p>Единый реестр аренды</p>
+        <p><b>Свидетельство</b></p>
+        <p>о внесении сведений</p>
+        <p>Общество ограниченной ответственности "<i>SuperRent</i>"</p>
+        <p><u>Реестровый номер: 2212</u></p>
     </div>
 
     <h3>Средний возраст наших клиентов: {{mage}} лет</h3>
@@ -67,6 +74,19 @@
     <h3>Общая сумма по сделкам аренды: {{sumRentReq}}$</h3>
     <h3>Средняя стоимость покупки: {{sumImm}}$</h3>
     <h3>Общая сумма по сделкам покупки: {{sumImmReq}}$</h3>
+    <code>for int i in range(1, 11):<br>
+        print('Hello world')
+    </code>
+
+    <br>
+    <q style='quotes: "„" "“";' cite="http://developer.mozilla.org">
+        This is a quotation taken from my mind.
+    </q >
+    <br>
+    <q style='quotes: "^" "^";' cite="http://developer.mozilla.org">
+        Цитата с другими кавычками
+    </q >
+
     <div style="text-align:center;">
         <iframe width="800" height="400" src="https://www.youtube.com/embed/BtAfPfCqUBg?si=sAdNtNtmYQNf9Mtp?mute=1"
                 title="YouTube video player"

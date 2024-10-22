@@ -1,0 +1,218 @@
+
+.container {
+    position: relative;
+    overflow: hidden;
+    background-color: black;
+    width: 100%;
+    height: 90vh;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.moon {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    /* transform: translateX(-50%); */
+    width: 60px;
+    height: 60px;
+    background:  #ccc;
+    border-radius: 50%;
+    animation: moonToSun 7s forwards;
+}
+
+@keyframes moonToSun {
+    50% {
+        top: 50px;
+        background: #ccc;
+
+    }
+    100% {
+        top: 120px;
+        background:  #ffdd57;
+
+    }
+}
+
+.house {
+    position: absolute;
+    width: 70px;
+    height: 100px;
+    background: #8B4513;
+    border: 2px solid #5B3A29;
+    opacity: 0;
+    animation: houseAnimation 7s forwards;
+}
+
+@keyframes houseAnimation {
+    0% {
+        transform: translateX(-50%) rotate(0deg) scale(0);
+        top: -100px;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) rotate(360deg) scale(1);
+    }
+    100% {
+        transform: translateX(-50%) rotate(360deg) scale(1);
+        top: calc(100vh - 100px);
+    }
+}
+
+.roof {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 35px solid transparent;
+    border-right: 35px solid transparent;
+    border-bottom: 40px solid #ff4500;
+    top: -40px;
+    left: 0;
+}
+
+.for-sale {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    opacity: 0;
+    animation: forSaleAnimation 7s forwards;
+}
+
+@keyframes forSaleAnimation {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 1; }
+}
+
+.cloud {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: cloudAnimation 7s linear forwards;
+}
+
+.cloud:before, .cloud:after {
+    content: '';
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.cloud1 {
+    width: 100px;
+    height: 60px;
+    top: 100px;
+    left: -100px;
+    animation: cloudAnimation 7s linear forwards;
+}
+
+.cloud1:before {
+    width: 80px;
+    height: 50px;
+    top: -20px;
+    left: 20px;
+}
+
+.cloud1:after {
+    width: 80px;
+    height: 50px;
+    top: -20px;
+    left: -40px;
+}
+
+.cloud2 {
+    width: 120px;
+    height: 70px;
+    top: 120px;
+    left: -150px;
+    animation: cloudAnimation 7s linear forwards;
+    animation-delay: 2s;
+}
+
+.cloud2:before {
+    width: 90px;
+    height: 60px;
+    top: -40px;
+    left: 25px;
+}
+
+.cloud2:after {
+    width: 90px;
+    height: 60px;
+    top: -15px;
+    left: -40px;
+}
+
+@keyframes cloudAnimation {
+    0% { left: -100px; }
+    100% { left: calc(100% + 100px); }
+}
+
+.company-name {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3em;
+    opacity: 0;
+    animation: companyNameAnimation 7s forwards;
+}
+
+@keyframes companyNameAnimation {
+    70% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/*---------------------------------------------------------------------*/
+
+.loader {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 10px solid #3498db62;
+    overflow: hidden;
+}
+
+.rectangle {
+    position: absolute;
+    width: 20px;
+    height: 40px;
+    background-color: #2b70c3;
+    border-radius: 10px; 
+    animation: move 2s linear infinite;
+}
+
+@keyframes move {
+    0% {
+        transform: translate(10px, 10px) rotate(0);
+
+    }
+    25% {
+        transform: translate(60px, 0) rotate(90deg);
+    
+    }
+
+    50% {
+        transform: translate(60px, 60px) rotate(180deg);
+    
+    }
+    75% {
+        transform: translate(10px, 50px) rotate(270deg);
+    }
+    100% {
+        transform: translate(10px, 10px) rotate(360deg);
+
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

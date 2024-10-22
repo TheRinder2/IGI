@@ -1,0 +1,48 @@
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Выравнивание по горизонтали */
+}
+
+.employee {
+  background: rgb(40, 40, 40);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 15px;
+  width: 250px; /* Ширина блока сотрудника */
+  text-align: center; /* Центрирование текста */
+  flex: 1 1 250px; /* Flex-grow, Flex-shrink, Flex-basis */
+}
+
+.employee img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%; /* Круглая форма фото */
+  margin-bottom: 15px;
+}
+
+.employee h2 {
+  font-size: 1.5em;
+  margin: 0 0 10px;
+}
+
+.employee p {
+  margin: 5px 0;
+  height: 30px;
+  font-size: 1em;
+}
+
+.employee .contact-info {
+  font-weight: bold; 
+  color: #007bff;
+}
+
+.employee .contact-info a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.employee .contact-info a:hover {
+  text-decoration: underline;
+}

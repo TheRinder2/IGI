@@ -1,5 +1,11 @@
 {% extends 'layout.html' %}
 {% load filters %}
+
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'RealtorBack/css/feedback.css' %}">
+{% endblock %}
+
 {%block title%}Отзывы{% endblock %}
 
 {% block сontent %}
@@ -8,11 +14,19 @@
         {{ form }}
         <button type="submit">Оставить комментарий</button>
     </form>
+    
     {% for el in comments %}
-        <div style="background-color:lightgrey; margin:5px">
-            <h1>{{ el.user.username }}</h1>
-            <p>{{ el.text }}</p>
-            <p>Оценка: {{ el.mark}} Дата: {{ el.data|convert_time_to_local }}</p>
+    <div class="review">
+        <div class="review-header">
+            <div class="review-name">{{ el.user.username }}</div>
+            <div class="review-rating" style="color:#ffc107;">
+                {% for i in el.mark|range_filter %}★{%endfor%}{% for i in 5|sub:el.mark|range_filter %}☆{%endfor%}
+            </div>
         </div>
+        <p class="review-description">{{ el.text }}</p>
+        <span>Дата: {{ el.data|convert_time_to_local }}</span>
+    </div>
+
+
     {% endfor %}
 {% endblock %}

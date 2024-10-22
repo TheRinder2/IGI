@@ -1,18 +1,50 @@
 {% extends 'layout.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'RealtorBack/css/main.css' %}">
+{% endblock %}
 
 {%block title%}Главная страница{% endblock %}
 
 {% block сontent %}
     <h1>Главная страница</h1>
+
+    <div class="loader">
+        <div class="rectangle"></div>
+    </div>
+
+    <div class="container">
+        <div class="moon"></div>
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+
+        <div class="house" style="left: 20%;">
+            <div class="roof"></div>
+            <div class="for-sale">Продается</div>
+        </div>
+        <div class="house" style="left: 50%;">
+            <div class="roof"></div>
+            <div class="for-sale">Продается</div>
+        </div>
+        <div class="house" style="left: 80%;">
+            <div class="roof"></div>
+            <div class="for-sale">Продается</div>
+        </div>
+
+        <div class="company-name">SuperRent</div>
+    </div>
+
+
     {% if lastnews %}
-        <div style="background-color:lightgrey; padding:10px; margin-bottom:5px">
+        <div class="div-dark-box">
             <img src="{{ lastnews.img.url }}" width="200" height="200">
             <h3>{{ lastnews.title }}</h3>
             <p>{% if showFullText %}
                {{ lastnews.text }}
                 {% else %}
                {{ lastnews.text|slice:20 }}
-                <a href="{% url 'home' %}?showFullText=False">...</a>
+                <a href="{% url 'home' %}?showFullText=False">...Читать далее</a>
                 {% endif %}</p>
         </div>
     {% endif %}
@@ -110,12 +142,16 @@
 
     <h1 style="text-align: center;"><b>Наши партнеры</b></h1>
     <section style="text-align: center;">
-        <a href="https://belarusbank.by" title="BelarusBank" style="margin:5px;" target="_blank">
-            <img height="40px" src="media/BelarusbankLogo.jpg">
-        </a>
-        <a href="https://T-bank.by" title="TBank" style="margin:5px;" target="_blank">
-            <img height="40px" src="media/TbankLogo.png">
-        </a>
+        <div style="padding: 2px 10px; background:green; display:inline-block; border-radius:100px;">
+            <a href="https://belarusbank.by" title="BelarusBank" style="margin:5px;" target="_blank">
+                <img height="40px" src="media/BelarusbankLogo.jpg">
+            </a>
+        </div>
+        <div style="padding: 2px 10px; background:yellow; display:inline-block; border-radius:100px;">
+            <a href="https://T-bank.by" title="TBank" style="margin:5px;" target="_blank">
+                <img height="40px" src="media/TbankLogo.png">
+            </a>
+        </div>
     </section>
 
 {% endblock %}

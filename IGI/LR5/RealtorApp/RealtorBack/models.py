@@ -52,7 +52,7 @@ class Rent(models.Model):
     ntype = models.IntegerField(default=0)
     text = models.TextField('Услуга')
     cost = models.IntegerField('Цена')
-    media = models.ImageField(null=True)
+    img = models.ImageField('Картинка', null=True)
     duration = models.DateTimeField('Длительность аренды')
 
 
@@ -61,10 +61,8 @@ class Immovables(models.Model):
     ntype = models.IntegerField()
     text = models.TextField('Описание')
     cost = models.IntegerField('Цена')
-    media = models.ImageField(null=True)
+    img = models.ImageField('Картинка', null=True)
 
-    def __str__(self):
-        return self.text
 
 
 class RequestRent(models.Model):

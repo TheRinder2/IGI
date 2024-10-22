@@ -1,15 +1,35 @@
 {% extends 'layout.html' %}
 {% load filters %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'RealtorBack/css/discounts.css' %}">
+{% endblock %}
+
 {%block title%}Скидки и акции{% endblock %}
 
 {% block сontent %}
-    {% for el in discounts%}
-      <div style="background-color:lightgrey;">
-            <h3>Название: {{ el.title }}</h3>
-            <h4>Описание: {{ el.text }}</h4>
-            <h4>Скидка: {{ el.uncost|convert_cost_to_discount}}%</h4>
-            <h4>Тип недвижимости: {{ el.ntype}}</h4>
-            <h4>Ключ: {{ el.key }}</h4>
-        </div>
-    {% endfor%}
+
+<table>
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Скидка</th>
+            <th>Тип недвижимости</th>
+            <th>Ключ</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for el in discounts%}
+        <tr>
+            <td>{{ el.title }}</h3>
+            <td>{{ el.text }}</h4>
+            <td>{{ el.uncost|convert_cost_to_discount}}%</h4>
+            <td>{{ el.ntype}}</h4>
+            <td>{{ el.key }}</h4>
+        </tr>
+        {% endfor%}
+    </tbody>
+</table>
 {% endblock %}

@@ -1,12 +1,15 @@
 {% extends 'layout.html' %}
-
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'RealtorBack/css/faq.css' %}">
+{% endblock %}
 {%block title%}Ответы на вопросы{% endblock %}
 
 {% block сontent %}
     <article>
         <h3 class="">Часто задаваемые вопросы:</h3>
         {% for el in posts%}
-            <details style="background-color:lightgrey; margin:5px; padding:5px;">
+            <details class="div-dark-box">
                 <summary>{{ el.question }}</summary>
                 <p>{{ el.answer }}</p>
                 <p>Дата ответа: {{ el.date }}</p>

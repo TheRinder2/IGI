@@ -1,15 +1,22 @@
 {% extends 'layout.html' %}
+{%load static%}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'RealtorBack/css/news.css' %}">
+{% endblock %}
 
 {%block title%}Новости{% endblock %}
 
 {% block сontent %}
+<div class="articles">
     {% for el in new%}
-        <div style="background-color:lightgrey; padding:10px; margin-bottom:5px">
-             <img src="{{ el.img.url }}" width="200" height="200">
-            <a href="{% url 'newsDetails' %}?id={{forloop.counter0}}">
-                <h3>{{ el.title }}</h3>
-            </a>
-            <p>{{ el.text }}</p>
+    <div class="article">
+        <img src="{{ el.img.url }}">
+        <div class="article-content">
+            <h2 class="article-title">{{ el.title }}</h2>
+            <p class="article-summary">{{ el.text }}</p>
+            <a class="read-more" href="{% url 'newsDetails' %}?id={{forloop.counter0}}">Читать далее</a>
         </div>
+    </div>
     {% endfor%}
+</div>
 {% endblock %}
